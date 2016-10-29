@@ -4,17 +4,14 @@
 %%% @doc
 %%%
 %%% @end
-%%% Created : 28. Oct 2016 4:00 PM
+%%% Created : 28. Oct 2016 4:51 PM
 %%%-------------------------------------------------------------------
--module(forloop).
+-module(mylists).
 -author("chen_j").
 
 %% API
--export([for/3]).
-
-for(Max, Max, F) -> [F(Max)];
-for(I, Max, F) -> [F(I) | for(I + 1, Max, F)].
+-export([sum/1]).
 
 
-
-
+sum([H | T]) -> H + sum(T);
+sum([]) -> 0.

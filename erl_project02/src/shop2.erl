@@ -4,17 +4,12 @@
 %%% @doc
 %%%
 %%% @end
-%%% Created : 28. Oct 2016 4:00 PM
+%%% Created : 28. Oct 2016 7:07 PM
 %%%-------------------------------------------------------------------
--module(forloop).
--author("chen_j").
-
-%% API
--export([for/3]).
-
-for(Max, Max, F) -> [F(Max)];
-for(I, Max, F) -> [F(I) | for(I + 1, Max, F)].
+-module(shop2).
+-export([total/1]).
+-import(lists, [map/2, sum/1]).
 
 
-
-
+total(L) ->
+  sum(map(fun({What, N}) -> shop:cost(What) * N end, L)).

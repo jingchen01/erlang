@@ -4,11 +4,14 @@
 %%% @doc
 %%%
 %%% @end
-%%% Created : 28. Oct 2016 2:30 PM
+%%% Created : 28. Oct 2016 5:04 PM
 %%%-------------------------------------------------------------------
+-module(mylists2).
+-author("chen_j").
 
--module(shop01).
--export([total/1]).
+%% API
+-export([map/2]).
 
-total([{What, N} | T]) -> shop:cost(What) * N + total(T);
-total([]) -> 0.
+map(_, []) -> [];
+map(F, [H | T]) -> [F(H) | map(F, T)].
+
