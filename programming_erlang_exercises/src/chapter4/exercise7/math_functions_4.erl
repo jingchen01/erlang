@@ -39,6 +39,7 @@ filter(_Fun, [], Result) ->
   % If there are no more items in the list
   % return the result
   Result;
+
 filter(Fun, [Item | Remaining], Result) ->
   % If another item still exists in the list
   % Apply `Fun` to it and check the result,
@@ -61,12 +62,13 @@ split([], {Even, Odd}) ->
   % reverse so we reverse them to correct the
   % order.
   {lists:reverse(Even), lists:reverse(Odd)};
+
 split([Item | List], {Even, Odd}) ->
   % In order to determine what list an item
   % should be added to we pass it to even/1. If
   % it returns true we add it to the Even list,
   % otherwise we add it to the Odd list.
-  case ?MODULE:even(Item) of
+  case even(Item) of
     true ->
       split(List, {[Item | Even], Odd});
     false ->

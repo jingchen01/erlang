@@ -208,6 +208,6 @@ rel/example_project
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 .idea/
-erl_project01/output/
-erl_project02/ebin/
-erl_project02/include/
+erl_project01a/output/
+erl_project02a/ebin/
+erl_project02a/include/
