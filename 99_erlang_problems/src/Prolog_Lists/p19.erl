@@ -19,7 +19,7 @@
 rotate(L, K) ->
   Length = length(L),
   if
-    K =:= 0 -> L;
+    K =:= 0 -> L; 
     K > Length -> L;
     K < -Length -> L;
     K > 0 -> lists:sublist(L, K + 1, Length - K) ++ lists:sublist(L, K);

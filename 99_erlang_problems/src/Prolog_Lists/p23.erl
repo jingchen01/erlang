@@ -13,7 +13,7 @@
 %% API
 -export([rnd_select/2]).
 
-
+%% This rnd_select generate randomly element list which length is greater than the input list.
 rnd_select(L, N) ->
 
   rnd_select(L, [], N).
