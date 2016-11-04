@@ -26,7 +26,9 @@ combination(0, _) ->
 combination(_, []) ->
   [];
 combination(N, [H | T]) ->
-  [[H | Choice] || Choice <- combination(N - 1, T)] ++ combination(N, T).
+  %%[[H | Choice] || Choice <- combination(N - 1, T)] ++ combination(N, T).
+  %% recommend use lists:concat/1 instead of ++
+  lists:concat([[[H | Choice] || Choice <- combination(N - 1, T)], combination(N, T)]).
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -39,7 +41,9 @@ combination2(1, Xs) ->
 combination2(M, [X | Xs]) ->
   X1 = [[X | Ys] || Ys <- combination2(M - 1, Xs)],
   X2 = [Ys || Ys <- combination2(M, Xs)],
-  X1 ++ X2.
+%%  X1 ++ X2.
+  %% recommend use lists:concat/1 instead of ++
+  lists:concat([X1, X2]).
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
