@@ -21,13 +21,3 @@ loop() ->
       From ! {self(), {error, Other}},
       loop()
   end.
-
-%%Test:
-%%3> Pid = spawn(area_server_final, loop, []).
-%%<0.67.0>
-%%4> area_server_final:area(Pid, {rectangle, 5,6}).
-%%30
-%%5> area_server_final:area(Pid, {square,6}).
-%%{error,{square,6}}
-%%10> area_server_final:area(Pid, {circle, 6}).
-%%113.09723999999999

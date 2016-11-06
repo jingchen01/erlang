@@ -7,5 +7,10 @@ loop() ->
       loop();
     {square, Side} ->
       io:format("Area of square is ~p~n", [Side * Side]),
+      loop();
+    {triangle, Side1, Side2, Side3} ->
+      S = (Side1 + Side2 + Side3) / 2,
+      Area = math:sqrt(S * (S - Side1) * (S - Side2) * (S - Side3)),
+      io:format("Area of triangle is ~p~n", [Area]),
       loop()
   end.
