@@ -29,22 +29,64 @@
 -author("chen_j").
 
 %% API
--export([]).
+-export([alert/1]).
 
 
-alert(NestList, Number) ->
-  Length = length(NestList),
+%%
+
+alert(PocketDepths) ->
+  Length = length(PocketDepths),
   if
     Length =:= 32 ->
-      alert(lists:nth(32, NestList), 32, []);
-    true -> "Please input valid data."
+      alert(PocketDepths, 1, []);
+    true -> "Please input valid PocketDepths."
   end.
 
+alert([], _ToothNumber, Result) ->
+  lists:reverse(Result);
 
-alert(OneTeethData, TeethNumber, Result) ->
-  MaxDepth = lists:max(OneTeethData),
+alert(PocketDepths, ToothNumber, Result) ->
+  %%pattern matching
+  [Head | Tail] = PocketDepths,
+  %% Head is CurrentToothData
+  MaxDepth = lists:max(Head),
   if
-    TeethNumber =:= 0 -> lists:reverse(Result);
-    MaxDepth >= 4 -> [[TeethNumber] | Result];
-    true -> Result
+    MaxDepth >= 4 -> alert(Tail, ToothNumber + 1, [ToothNumber | Result]);
+    true -> alert(Tail, ToothNumber + 1, Result)
   end.
+
+
+%%Test:
+%%3> PocketDepths = [[0], [2,2,1,2,2,1], [3,1,2,3,2,3],[3,1,3,2,1,2], [3,2,3,2,2,1], [2,3,1,2,1,1],[3,1,3,2,3,2], [3,3,2,1,3,1], [4,3,3,2,3,3],[3,1,1,3,2,2], [4,3,4,3,2,3], [2,3,1,3,2,2],[1,2,1,1,3,2], [1,2,2,3,2,3], [1,3,2,1,3,3], [0],[3,2,3,1,1,2], [2,2,1,1,3,2], [2,1,1,1,1,2],[3,3,2,1,1,3], [3,1,3,2,3,2], [3,3,1,2,3,3],[1,2,2,3,3,3], [2,2,3,2,3,3], [2,2,2,4,3,4],[3,4,3,3,3,4], [1,1,2,3,1,2], [2,2,3,2,1,3],[3,4,2,4,4,3], [3,3,2,1,2,3], [2,2,2,2,3,3],[3,2,3,2,3,2]].
+%%[[0],
+%%[2,2,1,2,2,1],
+%%[3,1,2,3,2,3],
+%%[3,1,3,2,1,2],
+%%[3,2,3,2,2,1],
+%%[2,3,1,2,1,1],
+%%[3,1,3,2,3,2],
+%%[3,3,2,1,3,1],
+%%[4,3,3,2,3,3],
+%%[3,1,1,3,2,2],
+%%[4,3,4,3,2,3],
+%%[2,3,1,3,2,2],
+%%[1,2,1,1,3,2],
+%%[1,2,2,3,2,3],
+%%[1,3,2,1,3,3],
+%%[0],
+%%[3,2,3,1,1,2],
+%%[2,2,1,1,3,2],
+%%[2,1,1,1,1,2],
+%%[3,3,2,1,1,3],
+%%[3,1,3,2,3,2],
+%%[3,3,1,2,3,3],
+%%[1,2,2,3,3,3],
+%%[2,2,3,2,3|...],
+%%[2,2,2,4|...],
+%%[3,4,3|...],
+%%[1,1|...],
+%%[2|...],
+%%[...]|...]
+%%
+%%teeth:alert(PocketDepths).
+%%[9,11,25,26,29]
